@@ -1,0 +1,23 @@
+# Node
+frontend/node_modules
+frontend/dist
+frontend/.vite
+*.log
+
+# .NET
+**/bin
+**/obj
+*.user
+*.suo
+
+# Env
+.env
+frontend/.env
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker volumes (no aplica si no los subes, pero por si acaso)
+**/pgdata
+**/miniodata
