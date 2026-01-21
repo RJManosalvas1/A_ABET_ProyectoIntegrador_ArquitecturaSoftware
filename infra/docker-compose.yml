@@ -1,0 +1,69 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: bio_postgres
+    environment:
+      POSTGRES_USER: bio
+      POSTGRES_PASSWORD: bio123
+      POSTGRES_DB: biometrics
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bio -d biometrics"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  redis:
+    image: redis:7
+    container_name: bio_redis
+    ports:
+      - "6379:6379"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: bio_rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672" # UI
+    environment:
+      RABBITMQ_DEFAULT_USER: bio
+      RABBITMQ_DEFAULT_PASS: bio123
+
+  minio:
+    image: minio/minio:latest
+    container_name: bio_minio
+    ports:
+      - "9000:9000"   # S3 API
+      - "9001:9001"   # Console
+    environment:
+      MINIO_ROOT_USER: bio
+      MINIO_ROOT_PASSWORD: bio12345
+    command: server /data --console-address ":9001"
+    volumes:
+      - miniodata:/data
+
+  kong:
+    image: kong:3.6
+    container_name: bio_kong
+    environment:
+      KONG_DATABASE: "off"
+      KONG_DECLARATIVE_CONFIG: /kong/declarative/kong.yml
+      KONG_PROXY_ACCESS_LOG: /dev/stdout
+      KONG_ADMIN_ACCESS_LOG: /dev/stdout
+      KONG_PROXY_ERROR_LOG: /dev/stderr
+      KONG_ADMIN_ERROR_LOG: /dev/stderr
+      KONG_LOG_LEVEL: notice
+    ports:
+      - "8000:8000"  # public gateway
+      - "8001:8001"  # admin api
+    volumes:
+      - ./kong.yml:/kong/declarative/kong.yml:ro
+
+volumes:
+  pgdata:
+  miniodata:

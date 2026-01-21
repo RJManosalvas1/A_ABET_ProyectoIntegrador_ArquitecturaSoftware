@@ -1,0 +1,13 @@
+_format_version: "3.0"
+
+services:
+  - name: core-api
+    host: host.docker.internal
+    port: 5042
+    protocol: http
+    routes:
+      - name: core-api-route
+        paths:
+          - /api
+          - /swagger
+        strip_path: false
