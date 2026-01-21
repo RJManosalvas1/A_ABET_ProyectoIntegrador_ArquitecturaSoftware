@@ -121,3 +121,5 @@ C:\Users\rjman\Desktop\biometric-architecture\core-api\Biometric.CoreApi\obj\Deb
 C:\Users\rjman\Desktop\biometric-architecture\core-api\Biometric.CoreApi\obj\Debug\net9.0\Biometric.CoreApi.pdb
 C:\Users\rjman\Desktop\biometric-architecture\core-api\Biometric.CoreApi\obj\Debug\net9.0\Biometric.CoreApi.genruntimeconfig.cache
 C:\Users\rjman\Desktop\biometric-architecture\core-api\Biometric.CoreApi\obj\Debug\net9.0\ref\Biometric.CoreApi.dll
+C:\Users\rjman\Desktop\biometric-architecture\core-api\Biometric.CoreApi\bin\Debug\net9.0\Biometric.CoreApi.xml
+C:\Users\rjman\Desktop\biometric-architecture\core-api\Biometric.CoreApi\obj\Debug\net9.0\Biometric.CoreApi.xml
